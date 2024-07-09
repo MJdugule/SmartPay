@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartpay/constants/constant.dart';
 import 'package:smartpay/res/widget/flat_button.dart';
 import 'package:smartpay/utilities/pref_utils.dart';
+import 'package:smartpay/views/dashboard/home_screen.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({super.key});
@@ -39,7 +40,11 @@ class _SuccessScreenState extends State<SuccessScreen> {
             verticalSpaceMedium,
             SPFlatButton(
               active: true,
-              pressState: () async {},
+              pressState: () async {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_){
+                  return const HomeScreen();
+                }));
+              },
               textColor: kWhite,
               text: "Get Started",
               buttonColor: AppColor.kGreyNeutral,

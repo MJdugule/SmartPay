@@ -11,6 +11,7 @@ import 'package:smartpay/utilities/user_secure_storage.dart';
 import 'package:smartpay/views/auth/auth_pin/set_pin_screen.dart';
 import 'package:smartpay/views/auth/register/verify_otp_screen.dart';
 import 'package:smartpay/views/auth/register/auth_profile_screen.dart';
+import 'package:smartpay/views/dashboard/home_screen.dart';
 import 'package:smartpay/views/dashboard/success_screen.dart';
 import 'package:smartpay/views/intro_screens/onboarding_screen.dart';
 
@@ -291,7 +292,7 @@ class AuthenticationProvider extends ChangeNotifier {
         await authenticationRepository.submitUserDetailsForSignIn(user);
     if (status == true) {
         navigatorKey.currentState!.push(
-          MaterialPageRoute(builder: (context) => const SuccessScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
     }else{
       setLoading(false);

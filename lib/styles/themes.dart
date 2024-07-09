@@ -33,7 +33,7 @@ class SmartPayTheme {
       visualDensity: VisualDensity.adaptivePlatformDensity,
       textSelectionTheme:
           const TextSelectionThemeData(cursorColor: kMainColorDark),
-      // colorScheme: const ColorScheme.light(),
+      colorScheme: const ColorScheme.light(primary: AppColor.kPrimaryColor),
       iconTheme: const IconThemeData(
         color: kBlack, //change your color here
       ),
@@ -82,7 +82,7 @@ class SmartPayTheme {
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: kMainColorLight,
       ),
-      colorScheme: const ColorScheme.dark(),
+      colorScheme: const ColorScheme.dark(primary: AppColor.kPrimaryColor),
       iconTheme: const IconThemeData(
         color: kWhite, //change your color here
       ),

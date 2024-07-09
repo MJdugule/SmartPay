@@ -60,6 +60,7 @@ class _OnboardingAnimationOneState extends State<OnboardingAnimationOne>
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Stack(
       alignment: AlignmentDirectional.center,
       // mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +82,7 @@ class _OnboardingAnimationOneState extends State<OnboardingAnimationOne>
           right: 0,
           left: 0,
           child: Container(
-            // height: size.height / 3,
+             height: size.height / 2.3,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
@@ -90,7 +91,7 @@ class _OnboardingAnimationOneState extends State<OnboardingAnimationOne>
                   // AppColor.kWhiteColor,
                   AppColor.kWhiteColor,
                   AppColor.kWhiteColor,
-                  AppColor.kWhiteColor.withOpacity(.02),
+                  AppColor.kWhiteColor.withOpacity(.007),
                 ])
                 // color: AppColor.kPrimaryColor
                 ),
@@ -204,6 +205,7 @@ class _OnboardingAnimationTwoState extends State<OnboardingAnimationTwo>
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Stack(
       alignment: AlignmentDirectional.center,
       // mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +227,7 @@ class _OnboardingAnimationTwoState extends State<OnboardingAnimationTwo>
           right: 0,
           left: 0,
           child: Container(
-            // height: size.height / 3,
+            height: size.height / 2.3,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
@@ -234,7 +236,7 @@ class _OnboardingAnimationTwoState extends State<OnboardingAnimationTwo>
                   // AppColor.kWhiteColor,
                   AppColor.kWhiteColor,
                   AppColor.kWhiteColor,
-                  AppColor.kWhiteColor.withOpacity(.02),
+                  AppColor.kWhiteColor.withOpacity(.007),
                 ])
                 // color: AppColor.kPrimaryColor
                 ),
