@@ -279,29 +279,32 @@ class AuthenticationProvider extends ChangeNotifier {
     return status;
   }
 
+   Future getUser() async {
+    setLoading(true);
+    final status =
+        await authenticationRepository.getUser();
+    if(status != null) {
+    if (status != false) {
+      navigatorKey.currentState!.push(
+        MaterialPageRoute(builder: (context) =>  HomeScreen(welcomeText: status["data"]["secret"],)),
+      );
+      setLoading(false);
+    }}
+
+    setLoading(false);
+    return status;
+  }
+
   Future checkPassPin(String pin) async {
     setLoading(true);
     String securedPin = await getPassKey();
     if (pin == securedPin) {
-      String password = await UserSecureStorage.getPasswordKey();
-       AuthUser user = AuthUser(
-      email: PrefUtils.getUserData()!.email.toString(),
-      password: password,
-    );
-    final status =
-        await authenticationRepository.submitUserDetailsForSignIn(user);
-    if (status == true) {
-        navigatorKey.currentState!.push(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-    }else{
-      setLoading(false);
-    }
-    setLoading(false);
+      getUser();
   }else{
+    setLoading(false);
     showError("Your Smartpay pin was incorrect. Please try again");
   }
-  setLoading(false);
+  
   }
 
   void clearAppDetaills() {

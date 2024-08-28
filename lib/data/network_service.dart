@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:smartpay/data/api_service.dart';
 import 'package:smartpay/data/api_urls.dart';
+import 'package:smartpay/data/server_config.dart';
 import 'package:smartpay/models/auth_user.dart';
 import 'package:smartpay/utilities/exception.dart';
 import 'package:smartpay/utilities/pref_utils.dart';
 import 'package:smartpay/utilities/snackbar_utils.dart';
 import 'package:smartpay/utilities/user_secure_storage.dart';
+import 'package:smartpay/viewmodels/authentication_viewmodel.dart';
 
 class NetworkService {
   ApiService apiService = ApiService();
@@ -82,28 +84,25 @@ class NetworkService {
       // print(httpResponse);
       return httpResponse;
     });
-    return res.fold((l){
+    return res.fold((l) {
       // print(l);
       return false;
-    } , (r) {
+    }, (r) {
       var userResponse = jsonDecode(r.body);
       UserSecureStorage.setUserCredentials(userResponse["data"]["token"]);
       PrefUtils.setUserData(r.body);
       return true;
     });
-  } 
-  
+  }
+
   //Submit user details for signin
   Future submitUserDetailsForSignIn(AuthUser authUser) async {
     // print(authUser.fullName);
     var res = await apiService.apiInterceptor(() async {
       var httpResponse =
           await http.post(Uri.parse(APIPathHelper().signInUser), body: {
-        
         'email': authUser.email.toString(),
-        
         'password': authUser.password.toString(),
-        
         'device_name': 'mobile'
       });
       final errorMessage =
@@ -114,14 +113,29 @@ class NetworkService {
       // print(httpResponse);
       return httpResponse;
     });
-    return res.fold((l){
+    return res.fold((l) {
       // print(l);
       return false;
-    } , (r) {
+    }, (r) {
       var userResponse = jsonDecode(r.body);
       UserSecureStorage.setUserCredentials(userResponse["data"]["token"]);
       PrefUtils.setUserData(r.body);
       return true;
+    });
+  }
+
+  Future getUser() async {
+    String authKeys = await AuthenticationProvider().getUserAuthKeys();
+    var response = await apiService.apiInterceptor(() async {
+      return http.get(Uri.parse(APIPathHelper().home), headers: {
+        headerKeyAuthorization: "Bearer $authKeys",
+      });
+    });
+    return response.fold((l) => false, (r) async {
+      // print(r.body);
+      var userResponse = jsonDecode(r.body);
+
+      return userResponse;
     });
   }
 }

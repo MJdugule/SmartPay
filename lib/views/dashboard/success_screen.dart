@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smartpay/constants/constant.dart';
+import 'package:smartpay/res/widget/app_spinner.dart';
 import 'package:smartpay/res/widget/flat_button.dart';
 import 'package:smartpay/utilities/pref_utils.dart';
-import 'package:smartpay/views/dashboard/home_screen.dart';
+import 'package:smartpay/viewmodels/authentication_viewmodel.dart';
 
 class SuccessScreen extends StatefulWidget {
   const SuccessScreen({super.key});
@@ -14,6 +16,8 @@ class SuccessScreen extends StatefulWidget {
 class _SuccessScreenState extends State<SuccessScreen> {
   @override
   Widget build(BuildContext context) {
+    final authenticationProvider =
+        Provider.of<AuthenticationProvider>(context, listen: true);
     return Scaffold(
       body: Padding(
         padding: safeAreaPadding,
@@ -38,12 +42,12 @@ class _SuccessScreenState extends State<SuccessScreen> {
               style: kRegularTextStyle.copyWith(fontSize: 16),
             ),
             verticalSpaceMedium,
-            SPFlatButton(
+            authenticationProvider.loading
+                ? const Center(child: AppSpinner())
+                : SPFlatButton(
               active: true,
               pressState: () async {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_){
-                  return const HomeScreen();
-                }));
+                authenticationProvider.getUser();
               },
               textColor: kWhite,
               text: "Get Started",

@@ -19,5 +19,8 @@ class APIPathHelper {
       '${APIBase.developmentURL}/auth/email/verify';
   String registerUser = '${APIBase.developmentURL}/auth/register';
   String signInUser = '${APIBase.developmentURL}/auth/login';
+
+  //Home
+  String home = '${APIBase.developmentURL}/dashboard';
   
 }

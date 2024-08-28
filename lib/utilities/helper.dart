@@ -4,4 +4,15 @@ class Helper {
     if (n >= 10) return "$n";
     return "0$n";
   }
+
+    String greeting() {
+    var hour = DateTime.now().hour;
+    if (hour <= 12) {
+      return 'Good Morning';
+    }
+    if (hour <= 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
 }

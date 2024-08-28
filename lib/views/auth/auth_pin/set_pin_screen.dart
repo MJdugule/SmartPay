@@ -59,7 +59,7 @@ class _SetPinScreenState extends State<SetPinScreen> {
             verticalSpaceMedium,
             verticalSpaceTiny,
             Text(
-              "Set you PIN code",
+              "Set your PIN code",
               style: kLargeTextStyle.copyWith(
                 fontSize: 24,
                 // height: 1.5,
